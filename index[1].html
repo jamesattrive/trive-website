@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>trive — GTM &amp; Partnerships Executive Search</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafaf8;
+      --offwhite: #f4f2ef;
+      --pink: #d4748a;
+      --pink-light: #f0d6db;
+      --pink-muted: #e8c4cc;
+      --grey: #8a8880;
+      --grey-light: #e8e6e2;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 4rem;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--grey-light); }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--grey);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--black); }
+
+    .nav-cta {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      border: 1px solid var(--black);
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    /* PAGES */
+    .page { display: none; padding-top: 80px; min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* ===== HOME ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 80px);
+      align-items: center;
+    }
+
+    .hero-left {
+      padding: 6rem 4rem 6rem 4rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--pink);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 4.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--grey);
+      line-height: 1.8;
+      max-width: 420px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      display: inline-block;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary:hover { background: #2a2a2a; }
+
+    .btn-ghost {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--grey);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: color 0.2s;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .btn-ghost:hover { color: var(--black); }
+    .btn-ghost::after { content: '→'; }
+
+    .hero-right {
+      background: var(--offwhite);
+      height: 100%;
+      min-height: calc(100vh - 80px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-image-wrap img {
+      width: 75%;
+      max-width: 380px;
+      border-radius: 50% 50% 0 0;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(15%);
+    }
+
+    .hero-bio-card {
+      position: absolute;
+      bottom: 3rem;
+      left: -2rem;
+      background: var(--white);
+      padding: 1.5rem 2rem;
+      width: 280px;
+      box-shadow: 0 2px 40px rgba(0,0,0,0.08);
+    }
+
+    .bio-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .bio-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 0.8rem;
+    }
+
+    .bio-text {
+      font-size: 0.82rem;
+      color: var(--grey);
+      line-height: 1.7;
+    }
+
+    /* SECTION SHARED */
+    section { padding: 6rem 4rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    /* VALUES */
+    .values-section {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .values-section .section-label { color: var(--pink-muted); }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .value-item {}
+    .value-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--pink);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .value-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+      font-style: italic;
+    }
+    .value-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+    }
+
+    /* CAROUSEL */
+    .carousel-wrap {
+      overflow: hidden;
+      margin-top: 3rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--grey-light);
+      border-bottom: 1px solid var(--grey-light);
+    }
+    .carousel-track {
+      display: flex;
+      gap: 0;
+      animation: carousel-scroll 25s linear infinite;
+      width: max-content;
+    }
+    .carousel-wrap:hover .carousel-track { animation-play-state: paused; }
+    .carousel-item {
+      padding: 0 3rem;
+      border-right: 1px solid var(--grey-light);
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .carousel-logo {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: filter 0.3s, opacity 0.3s;
+    }
+    .carousel-item:hover .carousel-logo {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+    @keyframes carousel-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* CLIENTS */
+    .clients-section { background: var(--offwhite); }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .client-item {
+      background: var(--white);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .client-item:hover { background: var(--pink-light); }
+
+    .client-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--grey);
+      text-align: center;
+    }
+
+    /* ===== TOOLS PAGE ===== */
+    .page-header {
+      padding: 5rem 4rem 3rem;
+      border-bottom: 1px solid var(--grey-light);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2px;
+      padding: 2px;
+      margin: 3rem 4rem;
+    }
+
+    .tool-card {
+      background: var(--white);
+      border: 1px solid var(--grey-light);
+      padding: 2.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--pink);
+      transition: height 0.3s;
+    }
+    .tool-card:hover { background: var(--offwhite); }
+    .tool-card:hover::before { height: 100%; }
+
+    .tool-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1rem;
+    }
+    .tool-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+    }
+    .tool-desc {
+      font-size: 0.85rem;
+      color: var(--grey);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .tool-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tool-link::after { content: '→'; transition: transform 0.2s; }
+    .tool-card:hover .tool-link::after { transform: translateX(4px); }
+
+    /* RUBRIC TOOL */
+    .rubric-wrap {
+      max-width: 760px;
+      margin: 3rem auto;
+      padding: 0 4rem;
+    }
+
+    .rubric-card {
+      border: 1px solid var(--grey-light);
+      padding: 2.5rem;
+    }
+
+    .rubric-step { display: none; }
+    .rubric-step.active { display: block; }
+
+    .step-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 2rem;
+    }
+
+    .rubric-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .rubric-sub {
+      font-size: 0.85rem;
+      color: var(--grey);
+      margin-bottom: 2rem;
+    }
+
+    .form-row {
+      margin-bottom: 1.2rem;
+    }
+    .form-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--grey-light);
+      background: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--pink); }
+
+    .criteria-row {
+      display: grid;
+      grid-template-columns: 1fr 80px 60px;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .weight-display {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--pink);
+      text-align: center;
+    }
+    .weight-total {
+      font-size: 0.8rem;
+      color: var(--grey);
+      text-align: right;
+      margin-bottom: 1.5rem;
+    }
+    .weight-total.error { color: #c0392b; }
+    .weight-total.ok { color: #27ae60; }
+
+    .scoring-row {
+      border: 1px solid var(--grey-light);
+      padding: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+    .scoring-criterion-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .scoring-weight-badge {
+      font-size: 0.7rem;
+      color: var(--pink);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .score-buttons {
+      display: flex;
+      gap: 4px;
+    }
+    .score-btn {
+      flex: 1;
+      padding: 0.5rem 0;
+      border: 1px solid var(--grey-light);
+      background: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .score-btn:hover { border-color: var(--pink); color: var(--pink); }
+    .score-btn.selected { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    .result-card {
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .result-score {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--black);
+    }
+    .result-score span { font-size: 2rem; color: var(--grey); }
+    .result-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin: 0.5rem 0 2rem;
+    }
+    .result-label.strong { color: #27ae60; }
+    .result-label.borderline { color: #e67e22; }
+    .result-label.weak { color: #c0392b; }
+
+    .result-breakdown {
+      margin: 2rem 0;
+      text-align: left;
+    }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--grey-light);
+    }
+    .breakdown-name { font-size: 0.9rem; }
+    .breakdown-bar-wrap {
+      flex: 1;
+      height: 3px;
+      background: var(--grey-light);
+      margin: 0 1rem;
+    }
+    .breakdown-bar {
+      height: 100%;
+      background: var(--pink);
+      transition: width 0.8s ease;
+    }
+    .breakdown-score {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--grey);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .btn-outline {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--black);
+      background: none;
+      padding: 0.7rem 1.5rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    /* ===== ASSESSMENTS ===== */
+    .assessment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      padding: 4rem;
+      align-items: center;
+    }
+    .assessment-text {}
+    .assessment-text p {
+      font-size: 0.9rem;
+      color: var(--grey);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+    .assessment-embed {
+      background: var(--offwhite);
+      padding: 3rem;
+      border: 1px solid var(--grey-light);
+    }
+    .assessment-embed h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .demo-form .form-row { margin-bottom: 1rem; }
+    .demo-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+    .demo-submit:hover { background: #2a2a2a; }
+
+    .attuned-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--grey-light);
+    }
+    .partner-badge {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+    .attuned-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 300;
+    }
+
+    /* ===== PODCASTS ===== */
+    .podcasts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 3rem 4rem;
+    }
+
+    .podcast-card {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .podcast-card:hover { transform: translateY(-4px); }
+
+    .podcast-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--offwhite);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .podcast-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .podcast-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black);
+    }
+    .play-icon {
+      width: 48px;
+      height: 48px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+    .podcast-meta {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 0.4rem;
+    }
+    .podcast-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .yt-link-wrap {
+      padding: 0 4rem 2rem;
+    }
+    .yt-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .yt-link:hover { color: var(--black); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+    }
+    footer a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--white); }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.08em;
+    }
+    .footer-logo .v-accent { color: var(--pink); font-style: italic; }
+
+    /* EDIT MODE */
+    .edit-bar {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .edit-toggle {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      padding: 0.7rem 1.4rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: background 0.2s;
+    }
+    .edit-toggle:hover { background: #2a2a2a; }
+    .edit-toggle.active { background: var(--pink); }
+    .edit-save {
+      background: #27ae60;
+      color: var(--white);
+      border: none;
+      padding: 0.7rem 1.4rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      display: none;
+    }
+    .edit-save:hover { background: #219a52; }
+    body.edit-mode [data-editable] {
+      outline: 2px dashed var(--pink);
+      outline-offset: 3px;
+      cursor: text;
+      min-width: 20px;
+      min-height: 1em;
+      border-radius: 2px;
+    }
+    body.edit-mode [data-editable]:hover { background: rgba(212,116,138,0.06); }
+    body.edit-mode [data-editable]:focus { outline: 2px solid var(--pink); background: rgba(212,116,138,0.08); }
+    .edit-hint {
+      position: fixed;
+      bottom: 5rem;
+      right: 2rem;
+      background: var(--white);
+      border: 1px solid var(--grey-light);
+      padding: 0.8rem 1.2rem;
+      font-size: 0.75rem;
+      color: var(--grey);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      display: none;
+      z-index: 999;
+      max-width: 220px;
+      line-height: 1.6;
+    }
+    body.edit-mode .edit-hint { display: block; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: var(--white);
+      width: 100%;
+      max-width: 520px;
+      padding: 3rem;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+    .modal-overlay.open .modal {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--grey);
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--black); }
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      margin-bottom: 0.4rem;
+    }
+    .modal-sub {
+      font-size: 0.85rem;
+      color: var(--grey);
+      margin-bottom: 2rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease forwards; }
+    .fade-up-2 { animation: fadeUp 0.6s 0.15s ease forwards; opacity: 0; }
+    .fade-up-3 { animation: fadeUp 0.6s 0.3s ease forwards; opacity: 0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 50vw; }
+      section { padding: 4rem 1.5rem; }
+      .values-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .assessment-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .podcasts-grid { padding: 2rem 1.5rem; }
+      .tools-grid { margin: 2rem 1.5rem; }
+      .rubric-wrap { padding: 0 1.5rem; }
+      .page-header { padding: 3rem 1.5rem 2rem; }
+      .yt-link-wrap { padding: 0 1.5rem 2rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+      .hero-left { padding: 3rem 1.5rem; }
+      .hero-bio-card { left: 1rem; bottom: 1rem; width: 240px; }
+    }
+  </style>
+</head>
+<body class="edit-mode">
+
+  <nav id="main-nav" class="">
+    <a class="nav-logo" href="#" onclick="showPage('home')"><img src="Trive_logo.jpg" alt="trive"></a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')" data-page="home" class="active">Home</a></li>
+      <li><a href="#" onclick="showPage('tools')" data-page="tools" class="">Tools</a></li>
+      <li><a href="#" onclick="showPage('assessments')" data-page="assessments" class="">Assessments</a></li>
+      <li><a href="#" onclick="showPage('podcasts')" data-page="podcasts" class="">Podcasts</a></li>
+    </ul>
+    <a href="#" class="nav-cta" onclick="openModal(); return false;">Work with us</a>
+  </nav>
+
+  <!-- HOME -->
+  <div id="page-home" class="page active">
+
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow fade-up" data-editable="" contenteditable="true">GTM &amp; Partnerships Executive Search</div>
+        <h1 class="hero-headline fade-up-2">
+          Precision hiring<br>for GTM roles, that<br>starts with the <em>brief.</em>
+        </h1>
+        <p class="hero-sub fade-up-3" data-editable="" contenteditable="true">Trive specialises in one part of the market: the IT Channel. For vendors, we hire the partnership leaders who build your indirect motion. For MSPs and consultancies, we hire the revenue executives who close it.</p>
+        <div class="hero-actions fade-up-3">
+          <a class="btn-primary" href="#" onclick="openModal(); return false;">Work with us</a>
+          <button class="btn-ghost" onclick="document.getElementById('about-anchor').scrollIntoView({behavior:'smooth'})">About James</button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-image-wrap">
+          <img src="headshot.jpg" alt="James Alexander — Trive">
+        </div>
+        <div class="hero-bio-card">
+          <div class="bio-name" data-editable="" contenteditable="true">James Alexander</div>
+          <div class="bio-title" data-editable="" contenteditable="true">Founder, Trive</div>
+          <div class="bio-text" data-editable="" contenteditable="true">GTM &amp; Partnerships recruiter. Dublin-based, globally networked.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT ANCHOR -->
+    <div id="about-anchor"></div>
+    <section style="background: var(--offwhite);">
+      <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
+        <div>
+          <div class="section-label">About</div>
+          <h2 class="section-title">Beyond the<br><em style="font-style:italic; color: var(--pink);">keyword search.</em></h2>
+        </div>
+        <div>
+          <p style="font-size: 0.95rem; color: var(--grey); line-height: 1.9; margin-bottom: 1.5rem;" data-editable="" contenteditable="true">I partner with CEOs and Revenue Leaders in SMBs to headhunt GTM talent who excel in key leadership traits that go deeper than what a keyword search can uncover. The conversation starts with character, and the traits that determine whether someone will perform in your environment. I'll challenge your thinking on who you need, and how you attract them.</p>
+          <p style="font-size: 0.95rem; color: var(--grey); line-height: 1.9;" data-editable="" contenteditable="true">My recruitment career began at Manpower Ireland in 2010, on a Scandinavian contract desk for IBM. That foundation took me to Melbourne, where I spent eight years moving from SAP implementation hiring to leading a data science and analytics team for a publicly listed global agency. I came home to Ireland with my family in 2018, and founded Trive in 2021.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section">
+      <div style="max-width: 1100px; margin: 0 auto;">
+        <div class="section-label">Core values</div>
+        <h2 class="section-title" style="color: var(--white);">What we stand for.</h2>
+        <div class="values-grid">
+          <div class="value-item">
+            <div class="value-number">01</div>
+            <div class="value-name" data-editable contenteditable="false">Vulnerability</div>
+            <div class="value-desc" data-editable contenteditable="false">Description coming soon.</div>
+          </div>
+          <div class="value-item">
+            <div class="value-number">02</div>
+            <div class="value-name" data-editable contenteditable="false">Victory</div>
+            <div class="value-desc" data-editable contenteditable="false">Description coming soon.</div>
+          </div>
+          <div class="value-item">
+            <div class="value-number">03</div>
+            <div class="value-name" data-editable contenteditable="false">Energy</div>
+            <div class="value-desc" data-editable contenteditable="false">Description coming soon.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="clients-section">
+      <div style="max-width: 1100px; margin: 0 auto;">
+        <div class="section-label">Client roster</div>
+        <h2 class="section-title">Trusted by teams<br>building for EMEA.</h2>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-item"><img src="logo-edgetier.png" alt="EdgeTier" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-bd.png" alt="BD" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-landmark.png" alt="Landmark" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-eurofins.png" alt="Eurofins" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-softworks.png" alt="Softworks" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-wrisk.png" alt="Wrisk" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-conscia.png" alt="Conscia" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-peak3.png" alt="Peak3" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-teckro.png" alt="Teckro" class="carousel-logo" /></div>
+          <!-- Duplicated for seamless loop -->
+          <div class="carousel-item"><img src="logo-edgetier.png" alt="EdgeTier" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-bd.png" alt="BD" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-landmark.png" alt="Landmark" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-eurofins.png" alt="Eurofins" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-softworks.png" alt="Softworks" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-wrisk.png" alt="Wrisk" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-conscia.png" alt="Conscia" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-peak3.png" alt="Peak3" class="carousel-logo" /></div>
+          <div class="carousel-item"><img src="logo-teckro.png" alt="Teckro" class="carousel-logo" /></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo"><img src="Trive_logo.jpg" alt="trive" style="height:28px; width:auto; filter:invert(1);"></div>
+      <div>Huckletree Dublin — The Academy, 42 Pearse St, Dublin D02 HV59</div>
+      <div><a href="mailto:jobs@trivetalent.com">jobs@trivetalent.com</a></div>
+      <div>© 2026 trive</div>
+    </footer>
+  </div>
+
+  <!-- TOOLS -->
+  <div id="page-tools" class="page">
+    <div class="page-header">
+      <div class="section-label">Client tools</div>
+      <h1 class="section-title">Built for better<br><em style="font-style:italic; color: var(--pink);">hiring decisions.</em></h1>
+      <p style="color: var(--grey); font-size: 0.9rem; max-width: 500px; margin-top: 0.5rem;">Free tools for clients and hiring managers. More being added regularly.</p>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card" onclick="showTool('rubric')">
+        <div class="tool-tag">Interview Tool</div>
+        <div class="tool-name">Interview Scorecard</div>
+        <div class="tool-desc">Define your criteria, weight them by importance, and score candidates consistently. Get a weighted total with a clear pass/borderline/weak rating. Export to PDF or email results.</div>
+        <a class="tool-link">Launch tool</a>
+      </div>
+      <div class="tool-card" style="opacity:0.5; cursor: default;">
+        <div class="tool-tag">Coming soon</div>
+        <div class="tool-name">Job Brief Builder</div>
+        <div class="tool-desc">A structured brief that captures role requirements, success metrics, and the traits that matter — giving us everything we need to search with precision.</div>
+        <span style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey);">In development</span>
+      </div>
+      <div class="tool-card" style="opacity:0.5; cursor: default;">
+        <div class="tool-tag">Coming soon</div>
+        <div class="tool-name">Salary Benchmarker</div>
+        <div class="tool-desc">EMEA GTM salary ranges by role, seniority, and market — updated quarterly based on live placement data.</div>
+        <span style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey);">In development</span>
+      </div>
+    </div>
+
+    <!-- RUBRIC TOOL (hidden initially) -->
+    <div id="rubric-tool" style="display:none;">
+      <div class="rubric-wrap">
+        <button onclick="showToolList()" class="btn-ghost" style="margin-bottom:2rem; font-size:0.75rem;">← Back to tools</button>
+
+        <!-- Step 1: Job details -->
+        <div class="rubric-card">
+          <div id="rubric-step-1" class="rubric-step active">
+            <div class="step-label">Step 1 of 3 — Job details</div>
+            <div class="rubric-title">Set up your scorecard</div>
+            <div class="rubric-sub">Name the role and define up to 5 criteria you'll use to assess candidates.</div>
+            <div class="form-row">
+              <label class="form-label">Job title</label>
+              <input class="form-input" id="job-title" type="text" placeholder="e.g. Head of Channel Partnerships">
+            </div>
+            <div class="form-row">
+              <label class="form-label">Candidate name</label>
+              <input class="form-input" id="candidate-name" type="text" placeholder="e.g. Sarah Murphy">
+            </div>
+            <div style="margin: 2rem 0 1rem;">
+              <label class="form-label">Criteria (2–5)</label>
+            </div>
+            <div id="criteria-inputs">
+              <div class="form-row"><input class="form-input criterion-input" type="text" placeholder="e.g. Communication"></div>
+              <div class="form-row"><input class="form-input criterion-input" type="text" placeholder="e.g. Technical knowledge"></div>
+              <div class="form-row"><input class="form-input criterion-input" type="text" placeholder="e.g. Cultural fit"></div>
+              <div class="form-row"><input class="form-input criterion-input" type="text" placeholder="e.g. Leadership potential (optional)"></div>
+              <div class="form-row"><input class="form-input criterion-input" type="text" placeholder="e.g. Ambiguity tolerance (optional)"></div>
+            </div>
+            <button class="btn-primary" style="margin-top:1.5rem;" onclick="goToWeighting()">Next: Set weightings →</button>
+          </div>
+
+          <!-- Step 2: Weighting -->
+          <div id="rubric-step-2" class="rubric-step">
+            <div class="step-label">Step 2 of 3 — Weightings</div>
+            <div class="rubric-title">How important is each?</div>
+            <div class="rubric-sub">Assign a percentage to each criterion. They must total 100%.</div>
+            <div id="weighting-rows"></div>
+            <div class="weight-total" id="weight-total-display">Total: 0%</div>
+            <div style="display:flex; gap:1rem; margin-top:1rem;">
+              <button class="btn-outline" onclick="goToStep(1)">← Back</button>
+              <button class="btn-primary" onclick="goToScoring()">Next: Score candidate →</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Scoring -->
+          <div id="rubric-step-3" class="rubric-step">
+            <div class="step-label">Step 3 of 3 — Scoring</div>
+            <div class="rubric-title" id="scoring-title">Score the candidate</div>
+            <div class="rubric-sub">Rate performance on each criterion from 1 (poor) to 10 (exceptional).</div>
+            <div id="scoring-rows"></div>
+            <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+              <button class="btn-outline" onclick="goToStep(2)">← Back</button>
+              <button class="btn-primary" onclick="calculateResult()">Calculate result →</button>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div id="rubric-result" class="rubric-step">
+            <div class="step-label">Result</div>
+            <div class="result-card">
+              <div class="result-score" id="result-score-display">0<span>/100</span></div>
+              <div class="result-label" id="result-label-display">—</div>
+            </div>
+            <div class="result-breakdown" id="result-breakdown"></div>
+            <div class="result-actions">
+              <button class="btn-outline" onclick="downloadPDF()">Download PDF</button>
+              <button class="btn-outline" onclick="emailResult()">Email results</button>
+              <button class="btn-primary" onclick="resetRubric()">New assessment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-logo"><img src="Trive_logo.jpg" alt="trive" style="height:28px; width:auto; filter:invert(1);"></div>
+      <div>Huckletree Dublin — The Academy, 42 Pearse St, Dublin D02 HV59</div>
+      <div><a href="mailto:jobs@trivetalent.com">jobs@trivetalent.com</a></div>
+      <div>© 2026 trive</div>
+    </footer>
+  </div>
+
+  <!-- ASSESSMENTS -->
+  <div id="page-assessments" class="page">
+    <div class="page-header">
+      <div class="section-label">People analytics</div>
+      <h1 class="section-title">Recruit. Retain.<br><em style="font-style:italic; color: var(--pink);">Realise.</em></h1>
+    </div>
+
+    <div class="assessment-grid">
+      <div class="assessment-text">
+        <div class="attuned-logo-area">
+          <div>
+            <div class="partner-badge">Trive partner product</div>
+            <div class="attuned-name">Attuned</div>
+          </div>
+        </div>
+        <p data-editable="" contenteditable="true">Attuned is a people analytics platform built around intrinsic motivation — the values, needs, and drivers that determine whether someone will stay, grow, and perform in a role.</p>
+        <p data-editable="" contenteditable="true">As a certified Attuned reseller, I use it as part of every senior placement process. The data it surfaces goes far beyond personality profiling — it tells you <em>why</em> someone performs, and what environment they need to keep doing it.</p>
+        <p data-editable="" contenteditable="true">Book a demo to see how it works, or talk to me about incorporating it into your next hire.</p>
+        <a href="https://www.attuned.ai" target="_blank" class="btn-ghost" style="display:inline-flex; text-decoration: none; color: var(--grey); font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; gap:0.5rem; margin-top:1rem; align-items:center;">Visit attuned.ai <span>→</span></a>
+      </div>
+
+      <div class="assessment-embed">
+        <h3>Book a demo</h3>
+        <form class="demo-form" onsubmit="submitDemo(event)">
+          <div class="form-row">
+            <label class="form-label">Your name</label>
+            <input class="form-input" type="text" id="demo-name" placeholder="James Murphy" required="">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Company</label>
+            <input class="form-input" type="text" id="demo-company" placeholder="Acme Corp" required="">
+          </div>
+          <div class="form-row">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" id="demo-email" placeholder="james@acme.com" required="">
+          </div>
+          <div class="form-row">
+            <label class="form-label">What are you trying to solve?</label>
+            <textarea class="form-input" id="demo-message" rows="3" placeholder="e.g. We're scaling our partnerships team and want to reduce attrition..."></textarea>
+          </div>
+          <button type="submit" class="demo-submit">Request demo →</button>
+        </form>
+        <div id="demo-success" style="display:none; text-align:center; padding:2rem 0;">
+          <div style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom:0.5rem;">Thank you.</div>
+          <div style="color: var(--grey); font-size:0.9rem;">I'll be in touch within one business day.</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-logo"><img src="Trive_logo.jpg" alt="trive" style="height:28px; width:auto; filter:invert(1);"></div>
+      <div>Huckletree Dublin — The Academy, 42 Pearse St, Dublin D02 HV59</div>
+      <div><a href="mailto:jobs@trivetalent.com">jobs@trivetalent.com</a></div>
+      <div>© 2026 trive</div>
+    </footer>
+  </div>
+
+  <!-- PODCASTS -->
+  <div id="page-podcasts" class="page">
+    <div class="page-header">
+      <div class="section-label">Content</div>
+      <h1 class="section-title">Conversations with<br>business leaders <em style="font-style:italic; color: var(--pink);">in tech.</em></h1>
+      <p style="color: var(--grey); font-size: 0.9rem; max-width: 500px; margin-top: 0.5rem;">Candid conversations with founders, revenue leaders, and partnership professionals building across EMEA.</p>
+    </div>
+
+    <div class="yt-link-wrap">
+      <a href="https://www.youtube.com/@james_trive" target="_blank" class="yt-link">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M15.6 1.9C15.4 1.2 14.9.7 14.2.5 13 .2 8 .2 8 .2s-5 0-6.2.3C1.1.7.6 1.2.4 1.9.1 3.1.1 6 .1 6s0 2.9.3 4.1c.2.7.7 1.2 1.4 1.4C3 11.8 8 11.8 8 11.8s5 0 6.2-.3c.7-.2 1.2-.7 1.4-1.4.3-1.2.3-4.1.3-4.1s0-2.9-.3-4.1zM6.4 8.5V3.5L10.6 6 6.4 8.5z" fill="currentColor"></path></svg>
+        View full channel on YouTube
+      </a>
+    </div>
+
+    <div class="podcasts-grid" id="podcasts-grid">
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=Vyb-x2G57r8','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/Vyb-x2G57r8/hqdefault.jpg" alt="The Channel Partner Podcast — Episode 01" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2026 · Ben Killeen</div>
+          <div class="podcast-title">The Channel Partner Podcast — Episode 01</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=lGb5toR970Y','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/lGb5toR970Y/hqdefault.jpg" alt="Career Capital, Modern Selling, and Ecosystems" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2025 · Eoin Walsh</div>
+          <div class="podcast-title">Career Capital, Modern Selling, and Ecosystems</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=rJDckq8nI8o','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/rJDckq8nI8o/hqdefault.jpg" alt="Hiring the Right Talent for Partnerships" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2025 · Bernhard Friedrichs</div>
+          <div class="podcast-title">Hiring the Right Talent for Partnerships</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=eQuKTf9P6s4','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/eQuKTf9P6s4/hqdefault.jpg" alt="From HubSpot to ScaleStation + the Future of GTM" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2025 · Kieran Krohn</div>
+          <div class="podcast-title">From HubSpot to ScaleStation + the Future of GTM</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=kRFznyHTesU','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/kRFznyHTesU/hqdefault.jpg" alt="Untangling the SaaS Success Story of Solgari" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2025 · John Colgan</div>
+          <div class="podcast-title">Untangling the SaaS Success Story of Solgari</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=n7Ijw0MSVuY','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/n7Ijw0MSVuY/hqdefault.jpg" alt="Defog The Stamp 1G, and Beyond" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2024 · Mark Heeney</div>
+          <div class="podcast-title">Defog The Stamp 1G, and Beyond</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=f22LuBhoTjU','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/f22LuBhoTjU/hqdefault.jpg" alt="Bootstrapped Bossin' ep 4" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2023 · Denis Coleman, CEO &amp; Founder @ WorkCompass</div>
+          <div class="podcast-title">Bootstrapped Bossin' ep 4</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=9NaJGNtfir0','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/9NaJGNtfir0/hqdefault.jpg" alt="Bootstrapped Bossin' ep 3" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2023 · Alan Meaney, CEO &amp; Co-founder @ Fund Recs</div>
+          <div class="podcast-title">Bootstrapped Bossin' ep 3</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=-GBecWFtuXg','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/-GBecWFtuXg/hqdefault.jpg" alt="Bootstrapped Bossin' ep 2" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2023 · Conor O'Toole, CTO &amp; Co-founder @ Loylap</div>
+          <div class="podcast-title">Bootstrapped Bossin' ep 2</div>
+        </div>
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=itf6ebYLv1k','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/itf6ebYLv1k/hqdefault.jpg" alt="Bootstrapped Bossin' ep 1" onerror="this.parentElement.innerHTML='&lt;div class=\'podcast-thumb-placeholder\'&gt;&lt;div class=\'play-icon\'&gt;▶&lt;/div&gt;&lt;/div&gt;'">
+          </div>
+          <div class="podcast-meta">2023 · Bren Hennessy, CEO @ Spark</div>
+          <div class="podcast-title">Bootstrapped Bossin' ep 1</div>
+        </div></div>
+
+    <footer>
+      <div class="footer-logo"><img src="Trive_logo.jpg" alt="trive" style="height:28px; width:auto; filter:invert(1);"></div>
+      <div>Huckletree Dublin — The Academy, 42 Pearse St, Dublin D02 HV59</div>
+      <div><a href="mailto:jobs@trivetalent.com">jobs@trivetalent.com</a></div>
+      <div>© 2026 trive</div>
+    </footer>
+  </div>
+
+  <script>
+    // ---- NAVIGATION ----
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + pageId).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === pageId);
+      });
+      window.scrollTo(0, 0);
+      if (pageId === 'podcasts') renderPodcasts();
+    }
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ---- TOOLS ----
+    function showTool(tool) {
+      document.querySelector('.tools-grid').style.display = 'none';
+      document.getElementById('rubric-tool').style.display = 'block';
+    }
+    function showToolList() {
+      document.querySelector('.tools-grid').style.display = 'grid';
+      document.getElementById('rubric-tool').style.display = 'none';
+      resetRubric();
+    }
+
+    // ---- RUBRIC ----
+    let rubricData = { criteria: [], weights: [], scores: [] };
+
+    function goToStep(n) {
+      document.querySelectorAll('.rubric-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('rubric-step-' + n).classList.add('active');
+    }
+
+    function goToWeighting() {
+      const inputs = document.querySelectorAll('.criterion-input');
+      rubricData.criteria = Array.from(inputs).map(i => i.value.trim()).filter(v => v.length > 0);
+      if (rubricData.criteria.length < 2) { alert('Please enter at least 2 criteria.'); return; }
+
+      const container = document.getElementById('weighting-rows');
+      container.innerHTML = '';
+      const defaultW = Math.floor(100 / rubricData.criteria.length);
+      rubricData.weights = rubricData.criteria.map((_, i) =>
+        i === 0 ? 100 - defaultW * (rubricData.criteria.length - 1) : defaultW
+      );
+
+      rubricData.criteria.forEach((c, i) => {
+        const row = document.createElement('div');
+        row.className = 'criteria-row';
+        row.innerHTML = `
+          <span style="font-size:0.9rem;">${c}</span>
+          <input type="number" class="form-input weight-input" min="1" max="99" value="${rubricData.weights[i]}" data-index="${i}" style="text-align:center;" />
+          <span class="weight-display">${rubricData.weights[i]}%</span>`;
+        container.appendChild(row);
+      });
+
+      container.querySelectorAll('.weight-input').forEach(inp => {
+        inp.addEventListener('input', updateWeightTotal);
+      });
+      updateWeightTotal();
+      goToStep(2);
+    }
+
+    function updateWeightTotal() {
+      const inputs = document.querySelectorAll('.weight-input');
+      let total = 0;
+      inputs.forEach((inp, i) => {
+        const val = parseInt(inp.value) || 0;
+        rubricData.weights[i] = val;
+        const display = inp.parentElement.querySelector('.weight-display');
+        if (display) display.textContent = val + '%';
+        total += val;
+      });
+      const el = document.getElementById('weight-total-display');
+      el.textContent = 'Total: ' + total + '%';
+      el.className = 'weight-total ' + (total === 100 ? 'ok' : total > 100 ? 'error' : '');
+    }
+
+    function goToScoring() {
+      const total = rubricData.weights.reduce((a, b) => a + b, 0);
+      if (total !== 100) { alert('Weights must total exactly 100%.'); return; }
+
+      const candidateName = document.getElementById('candidate-name').value || 'Candidate';
+      document.getElementById('scoring-title').textContent = 'Score ' + candidateName;
+
+      const container = document.getElementById('scoring-rows');
+      container.innerHTML = '';
+      rubricData.scores = new Array(rubricData.criteria.length).fill(0);
+
+      rubricData.criteria.forEach((c, i) => {
+        const row = document.createElement('div');
+        row.className = 'scoring-row';
+        const btns = [1,2,3,4,5,6,7,8,9,10].map(n =>
+          `<button class="score-btn" data-criterion="${i}" data-score="${n}" onclick="setScore(${i},${n},this)">${n}</button>`
+        ).join('');
+        row.innerHTML = `
+          <div class="scoring-criterion-name">${c}</div>
+          <div class="scoring-weight-badge">Weight: ${rubricData.weights[i]}%</div>
+          <div class="score-buttons">${btns}</div>`;
+        container.appendChild(row);
+      });
+
+      goToStep(3);
+    }
+
+    function setScore(criterionIdx, score, btn) {
+      rubricData.scores[criterionIdx] = score;
+      const allBtns = btn.closest('.score-buttons').querySelectorAll('.score-btn');
+      allBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    function calculateResult() {
+      if (rubricData.scores.some(s => s === 0)) {
+        alert('Please score all criteria before continuing.'); return;
+      }
+
+      let total = 0;
+      rubricData.criteria.forEach((c, i) => {
+        total += (rubricData.scores[i] / 10) * rubricData.weights[i];
+      });
+      total = Math.round(total);
+
+      document.getElementById('result-score-display').innerHTML = total + '<span>/100</span>';
+      const label = document.getElementById('result-label-display');
+      if (total >= 75) { label.textContent = 'Strong candidate'; label.className = 'result-label strong'; }
+      else if (total >= 55) { label.textContent = 'Borderline — further review recommended'; label.className = 'result-label borderline'; }
+      else { label.textContent = 'Not recommended'; label.className = 'result-label weak'; }
+
+      const breakdown = document.getElementById('result-breakdown');
+      breakdown.innerHTML = '<div style="font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--grey); margin-bottom:1rem;">Score breakdown</div>';
+      rubricData.criteria.forEach((c, i) => {
+        const contribution = Math.round((rubricData.scores[i] / 10) * rubricData.weights[i]);
+        const pct = (rubricData.scores[i] / 10) * 100;
+        breakdown.innerHTML += `
+          <div class="breakdown-row">
+            <span class="breakdown-name">${c}</span>
+            <div class="breakdown-bar-wrap"><div class="breakdown-bar" style="width:${pct}%"></div></div>
+            <span class="breakdown-score">${rubricData.scores[i]}/10</span>
+          </div>`;
+      });
+
+      document.querySelectorAll('.rubric-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('rubric-result').classList.add('active');
+    }
+
+    function downloadPDF() {
+      const job = document.getElementById('job-title').value || 'Role';
+      const candidate = document.getElementById('candidate-name').value || 'Candidate';
+      const scoreEl = document.getElementById('result-score-display').textContent;
+      const labelEl = document.getElementById('result-label-display').textContent;
+
+      let rows = '';
+      rubricData.criteria.forEach((c, i) => {
+        rows += `<tr><td style="padding:10px 0; border-bottom:1px solid #eee;">${c}</td><td style="padding:10px 0; border-bottom:1px solid #eee; text-align:center;">${rubricData.weights[i]}%</td><td style="padding:10px 0; border-bottom:1px solid #eee; text-align:center;">${rubricData.scores[i]}/10</td></tr>`;
+      });
+
+      const html = `<html><head><style>body{font-family:'DM Sans',sans-serif;padding:40px;color:#0a0a0a;} h1{font-size:2rem;font-weight:300;margin-bottom:4px;} .score{font-size:3.5rem;} table{width:100%;border-collapse:collapse;margin-top:24px;} th{text-align:left;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a8880;padding-bottom:8px;border-bottom:2px solid #0a0a0a;}</style></head><body>
+        <h1>trive — Interview Scorecard</h1>
+        <p style="color:#8a8880; margin-bottom:24px;">${job} · ${candidate} · ${new Date().toLocaleDateString('en-IE')}</p>
+        <div class="score">${scoreEl}</div>
+        <p style="letter-spacing:0.1em; text-transform:uppercase; font-size:0.8rem; margin-top:4px;">${labelEl}</p>
+        <table><thead><tr><th>Criterion</th><th style="text-align:center;">Weight</th><th style="text-align:center;">Score</th></tr></thead><tbody>${rows}</tbody></table>
+      </body></html>`;
+
+      const win = window.open('', '_blank');
+      win.document.write(html);
+      win.document.close();
+      win.print();
+    }
+
+    function emailResult() {
+      const job = document.getElementById('job-title').value || 'Role';
+      const candidate = document.getElementById('candidate-name').value || 'Candidate';
+      const score = document.getElementById('result-score-display').textContent;
+      const label = document.getElementById('result-label-display').textContent;
+      let body = `trive Interview Scorecard\n\nRole: ${job}\nCandidate: ${candidate}\nScore: ${score}\nVerdict: ${label}\n\nBreakdown:\n`;
+      rubricData.criteria.forEach((c, i) => { body += `${c}: ${rubricData.scores[i]}/10 (weight: ${rubricData.weights[i]}%)\n`; });
+      window.location.href = `mailto:?subject=Interview Scorecard — ${candidate} for ${job}&body=${encodeURIComponent(body)}`;
+    }
+
+    function resetRubric() {
+      rubricData = { criteria: [], weights: [], scores: [] };
+      document.querySelectorAll('.criterion-input').forEach(i => i.value = '');
+      document.getElementById('job-title').value = '';
+      document.getElementById('candidate-name').value = '';
+      goToStep(1);
+    }
+
+    // ---- ASSESSMENTS ----
+    function submitDemo(e) {
+      e.preventDefault();
+      document.querySelector('.demo-form').style.display = 'none';
+      document.getElementById('demo-success').style.display = 'block';
+    }
+
+    // ---- PODCASTS ----
+    // Replace video IDs with your actual YouTube video IDs
+    const podcasts = [
+      { id: 'Vyb-x2G57r8', title: 'The Channel Partner Podcast — Episode 01', guest: 'Ben Killeen', date: '2026' },
+      { id: 'lGb5toR970Y', title: 'Career Capital, Modern Selling, and Ecosystems', guest: 'Eoin Walsh', date: '2025' },
+      { id: 'rJDckq8nI8o', title: 'Hiring the Right Talent for Partnerships', guest: 'Bernhard Friedrichs', date: '2025' },
+      { id: 'eQuKTf9P6s4', title: 'From HubSpot to ScaleStation + the Future of GTM', guest: 'Kieran Krohn', date: '2025' },
+      { id: 'kRFznyHTesU', title: 'Untangling the SaaS Success Story of Solgari', guest: 'John Colgan', date: '2025' },
+      { id: 'n7Ijw0MSVuY', title: 'Defog The Stamp 1G, and Beyond', guest: 'Mark Heeney', date: '2024' },
+      { id: 'f22LuBhoTjU', title: 'Bootstrapped Bossin\' ep 4', guest: 'Denis Coleman, CEO & Founder @ WorkCompass', date: '2023' },
+      { id: '9NaJGNtfir0', title: 'Bootstrapped Bossin\' ep 3', guest: 'Alan Meaney, CEO & Co-founder @ Fund Recs', date: '2023' },
+      { id: '-GBecWFtuXg', title: 'Bootstrapped Bossin\' ep 2', guest: 'Conor O\'Toole, CTO & Co-founder @ Loylap', date: '2023' },
+      { id: 'itf6ebYLv1k', title: 'Bootstrapped Bossin\' ep 1', guest: 'Bren Hennessy, CEO @ Spark', date: '2023' },
+    ];
+
+    function renderPodcasts() {
+      const grid = document.getElementById('podcasts-grid');
+      grid.innerHTML = podcasts.map(p => `
+        <div class="podcast-card" onclick="window.open('https://www.youtube.com/watch?v=${p.id}','_blank')">
+          <div class="podcast-thumb">
+            <img src="https://img.youtube.com/vi/${p.id}/hqdefault.jpg" alt="${p.title}" onerror="this.parentElement.innerHTML='<div class=\\'podcast-thumb-placeholder\\'><div class=\\'play-icon\\'>▶</div></div>'" />
+          </div>
+          <div class="podcast-meta">${p.date} · ${p.guest}</div>
+          <div class="podcast-title">${p.title}</div>
+        </div>`).join('');
+    }
+  </script>
+  <!-- CONTACT MODAL -->
+  <div class="modal-overlay" id="contact-modal" onclick="closeModalOnOverlay(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-title">Work with us</div>
+      <div class="modal-sub">Tell us about the role. We'll take it from there.</div>
+      <form onsubmit="submitContact(event)">
+        <div class="form-row">
+          <label class="form-label">Your name</label>
+          <input class="form-input" type="text" id="contact-name" placeholder="James Murphy" required />
+        </div>
+        <div class="form-row">
+          <label class="form-label">Company</label>
+          <input class="form-input" type="text" id="contact-company" placeholder="Acme Corp" required />
+        </div>
+        <div class="form-row">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" id="contact-email" placeholder="james@acme.com" required />
+        </div>
+        <div class="form-row">
+          <label class="form-label">What are you hiring for?</label>
+          <textarea class="form-input" id="contact-message" rows="3" placeholder="e.g. Head of Partnerships, EMEA — we're a Series B SaaS vendor..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; margin-top:0.5rem;">Send enquiry →</button>
+      </form>
+      <div id="contact-success" style="display:none; text-align:center; padding:2rem 0;">
+        <div style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom:0.5rem;">Thank you.</div>
+        <div style="color: var(--grey); font-size:0.9rem;">I'll be in touch within one business day.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('contact-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('contact-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeModalOnOverlay(e) {
+      if (e.target === document.getElementById('contact-modal')) closeModal();
+    }
+    function submitContact(e) {
+      e.preventDefault();
+      document.querySelector('#contact-modal form').style.display = 'none';
+      document.getElementById('contact-success').style.display = 'block';
+      setTimeout(closeModal, 3000);
+    }
+  </script>
+
+</body></html>
